@@ -1,4 +1,4 @@
-# movable-frames-image-uncover
+# Movable Frames Image Uncover
 
 Click and drag the frames to reveal the image beneath.
 
