@@ -1,23 +1,17 @@
 ( function() {
-	var canvasContainer = document.getElementById('canvas-container');
-	var canvas = document.getElementById("canvas");
-	var ctx = canvas.getContext("2d");
-	var cWidth = 0;
-	var cHeight = 0;
-	var cWidthHalf = cWidth/2;
-	var cHeightHalf = cHeight/2;
-	var frames = [];
-	var mouse = { x: 0, y: 0, px: 0, py: 0, down: false };
-	var imageObj = new Image();
-	var frameImgObj = new Image();
-	var currentFrame = null;
+	var canvasContainer = document.getElementById('canvas-container'),
+		canvas = document.getElementById("canvas"),
+		ctx = canvas.getContext("2d"),
+		cWidth = 0,
+		cHeight = 0,
+		frames = [],
+		mouse = { x: 0, y: 0, px: 0, py: 0, down: false },
+		imageObj = new Image(),
+		frameImgObj = new Image(),
+		currentFrame = null;
 
-
-	function init() {
-		loadCanvasImageAssets();
-	}
 	
-	function loadCanvasImageAssets(){
+	function init(){
 		imageObj.onload = function() {
 			initCanvas();
 		};
@@ -129,7 +123,6 @@
 					element.width,
 					element.height
 				);
-
 			});
 		}
 	}
@@ -188,8 +181,6 @@
 		if(canvas){
 			canvas.width = cWidth = canvasContainer.clientWidth;
 	        canvas.height = cHeight = canvasContainer.clientHeight;
-	        cWidthHalf = cWidth/2;
-	        cHeightHalf = cHeight/2;
 
 	        recalculateFrames();
 	        restlessDraw();
