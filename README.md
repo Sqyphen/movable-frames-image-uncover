@@ -7,3 +7,6 @@ Works on all browsers that support canvas, even mobile.
 
 [Try it out here](https://sqyphen.github.io/movable-frames-image-uncover/)
 
+## To-do
+
++ fix drag positioning on touch events
