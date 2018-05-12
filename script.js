@@ -1,5 +1,4 @@
 ( function() {
-	//TODO: update canvas var to be an object with all canvas vars inside
 	var canvasContainer = document.getElementById('canvas-container');
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
@@ -31,6 +30,7 @@
 			window.addEventListener('resize', resizeCanvas, false);
 			generateFrames();
 			addMouseListeners();
+			addTouchListeners();
 			resizeCanvas();
 		}
 	}
@@ -68,6 +68,33 @@
 		canvas.addEventListener('mouseout', function( e ){
 			mouse.down = false;
 			currentFrame = null;
+		});
+	}
+
+	function addTouchListeners(){
+		canvas.addEventListener('touchmove', function( e ){
+			e.preventDefault();
+
+			var rect = canvas.getBoundingClientRect();
+			var previousX = mouse.x;
+			var previousY = mouse.y;
+
+			mouse.px = previousX;
+			mouse.py = previousY;
+			mouse.x = e.touches[0].clientX - rect.left;
+			mouse.y = e.touches[0].clientY - rect.top;
+
+			canvas.style.cursor = "default";
+
+			checkFrameDrag();
+		});
+		canvas.addEventListener('touchstart', function( e ){
+			e.preventDefault();
+			mouse.down = true;
+		});
+		canvas.addEventListener('touchend', function( e ){
+			e.preventDefault();
+			mouse.down = false;
 		});
 	}
 
@@ -112,7 +139,7 @@
 			for(var i = frames.length-1; i >= 0; --i ){
 				var element = frames[i];
 				if( isMouseOverElement( element ) ){
-					if( currentFrame == null ){
+					if( currentFrame === null ){
 						currentFrame = element;
 					}
 				}
@@ -124,8 +151,8 @@
 			}
 		}
 
-		for(var i = frames.length-1; i >= 0; --i ){
-			if( isMouseOverElement( frames[i] ) ){
+		for(var j = frames.length-1; j >= 0; --j ){
+			if( isMouseOverElement( frames[j] ) ){
 				canvas.style.cursor = "move";
 			}
 		}
@@ -162,7 +189,7 @@
 			canvas.width = cWidth = canvasContainer.clientWidth;
 	        canvas.height = cHeight = canvasContainer.clientHeight;
 	        cWidthHalf = cWidth/2;
-	        cHightHalf = cHeight/2;
+	        cHeightHalf = cHeight/2;
 
 	        recalculateFrames();
 	        restlessDraw();
