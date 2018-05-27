@@ -68,7 +68,6 @@
 	function addTouchListeners(){
 		canvas.addEventListener('touchmove', function( e ){
 			e.preventDefault();
-			console.log(currentWindow);
 
 			var rect = canvas.getBoundingClientRect();
 			var previousX = mouse.x;
@@ -95,8 +94,7 @@
 		canvas.addEventListener('touchend', function( e ){
 			e.preventDefault();
 			mouse = { x: 0, y: 0, px: 0, py: 0, down: false };
-			currentWindow = null;
-			console.log(currentWindow);
+			currentFrame = null;
 		});
 	}
 
