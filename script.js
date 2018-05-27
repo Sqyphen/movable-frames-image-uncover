@@ -78,7 +78,12 @@
 			mouse.x = e.touches[0].clientX - rect.left;
 			mouse.y = e.touches[0].clientY - rect.top;
 
-			canvas.style.cursor = "default";
+			if(mouse.px === 0){
+				mouse.px = mouse.x;
+			}
+			if(mouse.py === 0){
+				mouse.py = mouse.y;
+			}
 
 			checkFrameDrag();
 		});
@@ -88,6 +93,7 @@
 		});
 		canvas.addEventListener('touchend', function( e ){
 			e.preventDefault();
+			mouse = { x: 0, y: 0, px: 0, py: 0, down: false };
 			mouse.down = false;
 		});
 	}
