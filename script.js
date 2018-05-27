@@ -94,11 +94,11 @@
 		canvas.addEventListener('touchend', function( e ){
 			e.preventDefault();
 			mouse = { x: 0, y: 0, px: 0, py: 0, down: false };
-			mouse.down = false;
+			currentWindow = null;
 		});
 	}
 
-	function restlessDraw(){
+	function canvasDraw(){
 		if(ctx){
 	        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -156,7 +156,7 @@
 			}
 		}
 
-		restlessDraw();
+		canvasDraw();
 	}
 
 	function isMouseOverElement( element ) {
@@ -189,7 +189,7 @@
 	        canvas.height = cHeight = canvasContainer.clientHeight;
 
 	        recalculateFrames();
-	        restlessDraw();
+	        canvasDraw();
 		}
 	}
 
